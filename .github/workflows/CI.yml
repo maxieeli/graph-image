@@ -180,12 +180,6 @@ jobs:
         run: ${{ matrix.settings.build }}
         if: ${{ !matrix.settings.docker }}
         shell: bash
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: bindings-${{ matrix.settings.target }}
-          path: packages/*/*.node
-          if-no-files-found: error
   build-freebsd:
     runs-on: macos-12
     name: Build FreeBSD
@@ -229,12 +223,6 @@ jobs:
             rm -rf node_modules
             rm -rf target
             rm -rf .yarn
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: bindings-freebsd
-          path: packages/*/*.node
-          if-no-files-found: error
   test-macOS-windows-binding:
     name: Test bindings on ${{ matrix.settings.target }} - node@${{ matrix.node }}
     needs:
@@ -271,11 +259,6 @@ jobs:
           architecture: 'arm64'
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: bindings-${{ matrix.settings.target }}
-          path: artifacts
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -310,11 +293,6 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --immutable
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: bindings-x86_64-unknown-linux-gnu
-          path: artifacts
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -343,11 +321,6 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --immutable --mode=skip-build
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: bindings-x86_64-unknown-linux-musl
-          path: artifacts
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
