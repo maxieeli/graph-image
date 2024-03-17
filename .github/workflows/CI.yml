@@ -259,6 +259,11 @@ jobs:
           architecture: 'arm64'
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: bindings-${{ matrix.settings.target }}
+          path: artifacts
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -293,6 +298,11 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: bindings-${{ matrix.settings.target }}
+          path: artifacts
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -321,6 +331,11 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --immutable --mode=skip-build
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: bindings-${{ matrix.settings.target }}
+          path: artifacts
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -349,6 +364,11 @@ jobs:
           path: artifacts
       - name: Install dependencies
         run: yarn install --immutable --mode=skip-build
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: bindings-${{ matrix.settings.target }}
+          path: artifacts
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -389,6 +409,11 @@ jobs:
           path: artifacts
       - name: Install dependencies
         run: yarn install --immutable --mode=skip-build
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: bindings-${{ matrix.settings.target }}
+          path: artifacts
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -413,7 +438,6 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     needs:
-      - build-freebsd
       - test-macOS-windows-binding
       - test-linux-x64-gnu-binding
       - test-linux-x64-musl-binding
@@ -428,9 +452,10 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --immutable --mode=skip-build
-      - name: Download all artifacts
+      - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
+          name: bindings-${{ matrix.settings.target }}
           path: artifacts
       - name: Move artifacts
         run: yarn artifacts
