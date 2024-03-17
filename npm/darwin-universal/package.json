@@ -1,0 +1,15 @@
+{
+  "name": "@graph-pocket/graph-image-darwin-universal",
+  "version": "0.0.0",
+  "os": [
+    "darwin"
+  ],
+  "main": "graph-image.darwin-universal.node",
+  "files": [
+    "graph-image.darwin-universal.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  }
+}
