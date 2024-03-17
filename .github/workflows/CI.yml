@@ -1,7 +1,7 @@
 name: CI
 env:
   DEBUG: napi:*
-  APP_NAME: image
+  APP_NAME: graph-image
   MACOSX_DEPLOYMENT_TARGET: '10.13'
   SYSTEM_DEPS_DAV1D_BUILD_INTERNAL: 'always'
 permissions:
@@ -185,7 +185,7 @@ jobs:
         with:
           name: bindings-${{ matrix.settings.target }}
           path: ${{ env.APP_NAME }}.*.node
-          if-no-files-found: error
+          if-no-files-found: warn
   build-freebsd:
     runs-on: macos-12
     name: Build FreeBSD
@@ -269,7 +269,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: artifacts
+          path: .
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -308,7 +308,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: artifacts
+          path: .
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -341,7 +341,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: artifacts
+          path: .
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -367,14 +367,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: bindings-aarch64-unknown-linux-gnu
-          path: artifacts
+          path: .
       - name: Install dependencies
         run: yarn install --immutable --mode=skip-build
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: artifacts
+          path: .
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -412,14 +412,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: bindings-armv7-unknown-linux-gnueabihf
-          path: artifacts
+          path: .
       - name: Install dependencies
         run: yarn install --immutable --mode=skip-build
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: artifacts
+          path: .
       - name: Move artifacts
         run: yarn artifacts
         shell: bash
@@ -462,7 +462,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          path: artifacts
+          path: .
       - name: Move artifacts
         run: yarn artifacts
       - name: List packages
